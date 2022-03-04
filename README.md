@@ -1,5 +1,7 @@
 # DRAEM
 
+copy from https://github.com/VitjanZ/DRAEM
+
 PyTorch implementation of [DRAEM](https://openaccess.thecvf.com/content/ICCV2021/papers/Zavrtanik_DRAEM_-_A_Discriminatively_Trained_Reconstruction_Embedding_for_Surface_Anomaly_ICCV_2021_paper.pdf) - ICCV2021:
 
 ```
@@ -50,5 +52,4 @@ with pretrained models can be run with:
 ```
 python test_DRAEM.py --gpu_id 0 --base_model_name "DRAEM_seg_large_ae_large_0.0001_800_bs8" --data_path ./datasets/mvtec/ --checkpoint_path ./checkpoints/DRAEM_checkpoints/
 ```
-
 
