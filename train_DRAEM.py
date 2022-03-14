@@ -58,7 +58,9 @@ def train_on_device(obj_names, args):
         print('args.visualize:', args.visualize)
         n_iter = 0
         for epoch in range(args.epochs):
-            # print("Epoch: "+str(epoch))
+            scheduler.step()
+            if epoch % 100 == 0:
+                print("Epoch: "+str(epoch))
             for i_batch, sample_batched in enumerate(dataloader):
                 gray_batch = sample_batched["image"].cuda()
                 aug_gray_batch = sample_batched["augmented_image"].cuda()
@@ -81,12 +83,12 @@ def train_on_device(obj_names, args):
                 loss.backward()
                 optimizer.step()
 
-                if args.visualize and n_iter % 200 == 0:
+                if n_iter % 200 == 0:
                     print('visualize epoch' + str(epoch))
                     visualizer.plot_loss(l2_loss, n_iter, loss_name='l2_loss')
                     visualizer.plot_loss(ssim_loss, n_iter, loss_name='ssim_loss')
                     visualizer.plot_loss(segment_loss, n_iter, loss_name='segment_loss')
-                if args.visualize and n_iter % 400 == 0:
+                if n_iter % 400 == 0:
                     t_mask = out_mask_sm[:, 1:, :, :]
                     visualizer.visualize_image_batch(aug_gray_batch, n_iter, image_name='batch_augmented')
                     visualizer.visualize_image_batch(gray_batch, n_iter, image_name='batch_recon_target')
@@ -97,7 +99,6 @@ def train_on_device(obj_names, args):
 
                 n_iter +=1
 
-            scheduler.step()
 
             torch.save(model.state_dict(), os.path.join(args.checkpoint_path, run_name+".pckl"))
             torch.save(model_seg.state_dict(), os.path.join(args.checkpoint_path, run_name+"_seg.pckl"))
