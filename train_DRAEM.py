@@ -54,7 +54,7 @@ def train_on_device(obj_names, args):
         dataset = MVTecDRAEMTrainDataset(args.data_path + obj_name + "/train/good/", args.anomaly_source_path, resize_shape=[256, 256])
 
         dataloader = DataLoader(dataset, batch_size=args.bs,
-                                shuffle=False, num_workers=2)
+                                shuffle=True, num_workers=2)
 
         print('args.visualize:', args.visualize)
         n_iter = 0
