@@ -55,6 +55,7 @@ def train_on_device(obj_names, args):
         dataloader = DataLoader(dataset, batch_size=args.bs,
                                 shuffle=False, num_workers=2)
 
+        print('args.visualize:', args.visualize)
         n_iter = 0
         for epoch in range(args.epochs):
             # print("Epoch: "+str(epoch))
