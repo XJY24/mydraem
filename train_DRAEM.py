@@ -84,7 +84,7 @@ def train_on_device(obj_names, args):
                 optimizer.step()
 
                 if n_iter % 200 == 0:
-                    print('visualize iter ' + str(iter)+' epoch '+ str(epoch))
+                    print('visualize iter ' + str(n_iter)+' epoch '+ str(epoch))
                     visualizer.plot_loss(l2_loss, n_iter, loss_name='l2_loss')
                     visualizer.plot_loss(ssim_loss, n_iter, loss_name='ssim_loss')
                     visualizer.plot_loss(segment_loss, n_iter, loss_name='segment_loss')
